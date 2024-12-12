@@ -3,6 +3,8 @@ import { NavLink, BrowserRouter as Router, Route, Routes, Link, Navigate, useLoc
 import './components/Admin/App.css';
 
 import Article from './components/Admin/Article';
+import LoginForm from './components/Admin/LoginForm';
+import QueryList from './components/Admin/QueryList';
 
 
 
@@ -43,7 +45,7 @@ useEffect(() => {
   return (
     <div>
       {/* Conditionally render the navbar based on the current route */}
-            {location.pathname !== '/login' && location.pathname !== '/regi' && location.pathname !== '/userdash' && location.pathname !== '/table' && (
+            {location.pathname !== '/adminlogin' && (
       <nav className="navbar">
         <div className="navbar-container">
           <div className="logo-container">
@@ -55,10 +57,10 @@ useEffect(() => {
           <div className="right-corner-icons">
 
             <div className="login-container">
-              <Link to="/login">
+              <Link to="/adminlogin">
                 <button className="login-button">
-                  <img src={`${process.env.PUBLIC_URL}/images/login.jpg`} alt="Login" className="icon" />
-                  Login
+                  <img src={`${process.env.PUBLIC_URL}/images/login.jpg`} alt="Logout" className="icon" />
+                  Logout
                 </button>
               </Link>
             </div>
@@ -70,7 +72,7 @@ useEffect(() => {
           <ul className="nav-links">
 
             <li><NavLink to="/article" className={({ isActive }) => (isActive ? 'active' : '')}>ARTICLE CREATE</NavLink></li>
-            <li><NavLink to="/*" className={({ isActive }) => (isActive ? 'active' : '')}>RESPOND OF QUERY</NavLink></li>
+            <li><NavLink to="/query" className={({ isActive }) => (isActive ? 'active' : '')}>RESPOND OF QUERY</NavLink></li>
 
 
           </ul>
@@ -86,6 +88,8 @@ useEffect(() => {
 
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/article" element={<Article />} />
+          <Route path="/adminlogin" element={<LoginForm />} />
+          <Route path="/query" element={<QueryList />} />
 
 
 
