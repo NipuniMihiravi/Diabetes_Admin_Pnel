@@ -12,21 +12,21 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Hardcoded credentials
         const validEmail = 'admin@gmail.com';
         const validPassword = 'admin';
 
-        // Check if the input matches the hardcoded credentials
         if (email === validEmail && password === validPassword) {
-            // Handle successful login (example: redirect or update state)
+            // Store user session in sessionStorage
+            const userData = { email };
+            sessionStorage.setItem("user", JSON.stringify(userData));
+
             console.log('Login successful');
-            // Example: navigate to a different page after successful login
-            navigate('/article');  // Uncomment if using react-router-dom for navigation
+            navigate('/article'); // Redirect to the article page
         } else {
-            // Handle invalid credentials
             setError('Invalid credentials');
         }
     };
+
 
     return (
         <div className="login-form-container">

@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // For redirection
 
 const QueryList = () => {
     const [contacts, setContacts] = useState([]);
     const [editContact, setEditContact] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-    useEffect(() => {
-        fetchContacts();
+       const [user, setUser] = useState(null); // Store session user
+
+      const navigate = useNavigate(); // For redirecting
+
+ useEffect(() => {
+      const loggedInUser = sessionStorage.getItem("user");
+      if (!loggedInUser) {
+        navigate("/adminlogin"); // Redirect to login if not authenticated
+      } else {
+        setUser(JSON.parse(loggedInUser)); // Set user details from session
+      }
+      fetchContacts();
     }, []);
 
     const fetchContacts = async () => {
@@ -104,7 +115,7 @@ const QueryList = () => {
             {isEditModalOpen && editContact && (
                 <div className="custom-modal">
                     <div className="modal-content">
-                        <h2>Edit Contact</h2>
+                        <h2>Make Query Respond</h2>
                         <textarea
                             name="replyNote"
                             placeholder="Reply Note"

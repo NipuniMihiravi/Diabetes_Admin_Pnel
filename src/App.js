@@ -6,6 +6,8 @@ import Article from './components/Admin/Article';
 import LoginForm from './components/Admin/LoginForm';
 import QueryList from './components/Admin/QueryList';
 
+import PredictForm from './components/AI/PredictForm';
+
 
 
 
@@ -90,6 +92,7 @@ useEffect(() => {
           <Route path="/article" element={<Article />} />
           <Route path="/adminlogin" element={<LoginForm />} />
           <Route path="/query" element={<QueryList />} />
+          <Route path="/predict" element={<PredictForm />} />
 
 
 

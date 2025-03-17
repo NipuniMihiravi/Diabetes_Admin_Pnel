@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // For redirection
 import './App.css';
 
 const Article = () => {
@@ -14,10 +15,20 @@ const Article = () => {
   });
   const [categoryFilter, setCategoryFilter] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+   const [user, setUser] = useState(null); // Store session user
 
-  useEffect(() => {
-    fetchArticles();
-  }, [categoryFilter]);
+  const navigate = useNavigate(); // For redirecting
+
+    useEffect(() => {
+      const loggedInUser = sessionStorage.getItem("user");
+      if (!loggedInUser) {
+        navigate("/adminlogin"); // Redirect to login if not authenticated
+      } else {
+        setUser(JSON.parse(loggedInUser)); // Set user details from session
+      }
+      fetchArticles();
+    }, [categoryFilter]);
+
 
   const fetchArticles = () => {
     axios
